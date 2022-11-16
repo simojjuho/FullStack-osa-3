@@ -1,0 +1,34 @@
+{
+  "name": "puhelinluettelo_backend",
+  "version": "0.0.1",
+  "description": "\"Puhelinluettelo-sovelluksen backend-puoli.\"",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simojjuho/FullStack-osa-3.git"
+  },
+  "keywords": [
+    "puhelinluettelo",
+    "backend",
+    "harjoitus",
+    "training"
+  ],
+  "author": "Juho Simojoki",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/simojjuho/FullStack-osa-3/issues"
+  },
+  "homepage": "https://github.com/simojjuho/FullStack-osa-3#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
