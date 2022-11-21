@@ -1,4 +1,5 @@
 const express = require('express')
+const Contact = require('./models/contact')
 const morgan = require('morgan')
 const cors = require('cors')
 const time = new Date
