@@ -9,8 +9,9 @@
     "test": "test",
     "build:ui": "rm -rf build && cd ~/Asiakirjat/Koodaus/'HY Full Stack'/'Osa 2'/puhelinluettelo && npm run build && cp -r build ~/Asiakirjat/Koodaus/HY_FS2022_Osa3",
     "deploy": "fly deploy",
-    "deploy:full": "npm run build:ui && npm run deploy",    
-    "logs:prod": "fly logs"
+    "deploy:full": "npm run build:ui && npm run deploy",
+    "logs:prod": "fly logs",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -36,6 +37,7 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "eslint": "^8.28.0",
     "nodemon": "^2.0.20"
   }
 }
