@@ -6,7 +6,11 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "test"
+    "test": "test",
+    "build:ui": "rm -rf build && cd ~/Asiakirjat/Koodaus/'HY Full Stack'/'Osa 2'/puhelinluettelo && npm run build && cp -r build ~/Asiakirjat/Koodaus/HY_FS2022_Osa3",
+    "deploy": "fly deploy",
+    "deploy:full": "npm run build:ui && npm run deploy",    
+    "logs:prod": "fly logs"
   },
   "repository": {
     "type": "git",
