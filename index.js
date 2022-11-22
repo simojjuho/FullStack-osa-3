@@ -66,26 +66,30 @@ app.put('/api/persons/:id', (request, response, next) => {
     name: request.body.name,
     number: request.body.number
   }
-  Contact.findByIdAndUpdate(request.params.id, contact, {new: true})
+  Contact.findByIdAndUpdate(
+    request.params.id,
+    contact,
+    {  new: true, runValidators: true, context: 'query'  }
+  )
     .then(updatedContact => {
       response.json(updatedContact)
     })
     .catch(error => next(error))
 })
 
-app.post('/api/persons', (request, response) => {
-
-  const body = request.body
-  if (body.name === undefined || body.number === undefined) return response.status(400).json({ error: 'content missing!' })
-  
+app.post('/api/persons', (request, response, next) => {
   const contact = new Contact({
-    name: body.name,
-    number: body.number
+    name: request.body.name,
+    number: request.body.number
   })
 
-  contact.save().then(savedNumber => {
+  if (contact.name === undefined || contact.number === undefined) return response.status(400).json({ error: 'content missing!' })
+
+  contact.save()
+    .then(savedNumber => {
     response.json(savedNumber)
   })
+    .catch(error => next(error))
 })
 
 const unknownEndpoint = (request, response) => {
@@ -95,16 +99,21 @@ const unknownEndpoint = (request, response) => {
 app.use(unknownEndpoint)
 
 const errorHandler = (error, request, response, next) => {
-  if(error.name === "CastError") response.status(404).send({ error: 'malformatted id'})
-  else{
-    response.status(404).send({error: 'unknown error'})
-}
+  console.error(error.message)
+  
+  if(error.name === "CastError") {
+    return response.status(404).send({ error: 'malformatted id'})
+  } else if(error.name === 'ValidationError') {
+    return response.status(400).send({error: error.message})
+  }
+
+  next(error)
 }
 
 app.use(errorHandler)
 
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
